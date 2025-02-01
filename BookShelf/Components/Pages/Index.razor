@@ -1,0 +1,29 @@
+﻿@using BookShelf.Services
+@using BookShelf.Models
+@page "/index"
+@inject BookShelfService BookShelfService
+
+<h1 class="text-center page-title">Book of the Day</h1>
+
+@if (randomBook != null)
+{
+    <article class="book-article">
+        <h2 class="book-title">@randomBook.Title</h2>
+        <p class="book-author"><strong>Author:</strong> @randomBook.Author</p>
+        <p class="book-description">@randomBook.Description</p>
+        <p class="book-category"><strong>Category:</strong> @randomBook.Category.Name</p>
+    </article>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    private Book? randomBook;
+
+    protected override async Task OnInitializedAsync()
+    {
+        randomBook = await BookShelfService.GetRandomBookAsync();
+    }
+}

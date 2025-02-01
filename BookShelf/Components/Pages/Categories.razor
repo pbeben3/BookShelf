@@ -1,0 +1,74 @@
+﻿@using BookShelf.Services
+@using BookShelf.Models
+@inject BookShelfService BookService
+@rendermode InteractiveServer
+@page "/categories"
+
+<h1 class="text-center page-title">Books by Categories</h1>
+
+@if (selectedCategory == null)
+{
+    <section class="category-selection">
+        <p>Select a category to see the books:</p>
+        @foreach (BookCategory category in Enum.GetValues(typeof(BookCategory)))
+        {
+            <button @onclick="() => LoadBooksForCategory(category)" class="category-button">
+                @category
+            </button>
+        }
+    </section>
+}
+else
+{
+    <section class="category-details">
+        <button @onclick="() => selectedCategory = null" class="back-button">
+            Back to categories
+        </button>
+        <h2 class="category-title">Books in category: @selectedCategory</h2>
+
+        @if (booksInCategory.Any())
+        {
+            <ul class="book-list">
+                @foreach (var book in booksInCategory)
+                {
+                    <li class="book-item"
+                        @onmouseover="() => ShowDescription(book)"
+                        @onmouseleave="HideDescription">
+                        <strong>@book.Title</strong> by @book.Author
+
+                        @if (hoveredBook == book)
+                        {
+                            <p class="book-description">@book.Description</p>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No books in this category.</p>
+        }
+    </section>
+}
+
+@code {
+    private BookCategory? selectedCategory = null;
+    private List<Book> booksInCategory = new();
+    private Book? hoveredBook = null; 
+
+    private async Task LoadBooksForCategory(BookCategory category)
+    {
+        selectedCategory = category;
+        booksInCategory = await BookService.GetBooksByCategoryAsync(category);
+    }
+
+    private void ShowDescription(Book book)
+    {
+        hoveredBook = book;
+    }
+
+    private void HideDescription()
+    {
+        hoveredBook = null;
+    }
+}

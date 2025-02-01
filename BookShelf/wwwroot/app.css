@@ -1,0 +1,508 @@
+/* Styl ogólny dla ca³ego menu */
+.navbar {
+    background-color: #6f4f28; /* Ciemny br¹z (kolor drewna) */
+    color: #fff; /* Bia³y tekst */
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Wiêkszy cieñ */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; /* P³ynne przejœcie z transformacj¹ */
+}
+
+    .navbar:hover {
+        background-color: #8b5e3c; /* Jaœniejszy odcieñ br¹zu przy najechaniu */
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3); /* Wiêkszy cieñ przy najechaniu */
+        transform: translateY(-5px); /* Delikatne uniesienie przy najechaniu */
+    }
+
+/* Styl nawigacji */
+.nav-scrollable {
+    background-color: #d8c8a7; /* Jasny br¹zowy dla t³a nawigacji */
+    border-radius: 8px;
+    overflow-y: auto;
+    height: 100vh; /* Pe³na wysokoœæ okna */
+    transition: background-color 0.4s ease, transform 0.4s ease; /* P³ynne przejœcie */
+}
+
+    .nav-scrollable:hover {
+        background-color: #a68c62; /* Ciemniejszy odcieñ br¹zu przy najechaniu */
+        transform: translateX(5px); /* Delikatne przesuniêcie w prawo */
+    }
+
+/* Styl dla elementów nawigacyjnych */
+.nav-item {
+    padding: 15px;
+    border-bottom: 1px solid #9e9e9e; /* Szary podzia³ miêdzy elementami */
+    transition: background-color 0.3s ease, padding-left 0.3s ease; /* P³ynne przejœcie */
+}
+
+    .nav-item:hover {
+        background-color: #9e9e9e; /* Szare t³o przy najechaniu */
+        padding-left: 25px; /* Wiêkszy odstêp z lewej strony przy najechaniu */
+    }
+
+/* Styl dla linków nawigacyjnych */
+.nav-link {
+    color: #333; /* Ciemnoszary tekst */
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease, padding 0.3s ease; /* P³ynne przejœcie */
+}
+
+    .nav-link:hover {
+        color: #fff; /* Bia³y tekst przy najechaniu */
+        background-color: #8b5e3c; /* Zmiana koloru t³a przy najechaniu */
+        border-radius: 4px;
+        padding: 8px; /* Wiêksze wyœrodkowanie tekstu */
+    }
+
+    /* Ikony w menu */
+    .nav-link .bi {
+        margin-right: 10px;
+        font-size: 1.4rem;
+    }
+
+/* Toggler button (hamburger menu) */
+.navbar-toggler {
+    background-color: #6f4f28;
+    border: none;
+    transition: background-color 0.3s ease; /* P³ynne przejœcie */
+}
+
+    .navbar-toggler:hover {
+        background-color: #8b5e3c;
+    }
+
+.nav-menu-icon {
+    font-size: 1.2rem; /* Ustalony rozmiar ikon */
+    margin-right: 8px; /* Odstêp miêdzy ikon¹ a tekstem */
+    vertical-align: middle; /* Wyrównanie pionowe */
+}
+
+/* Responsywnoœæ - menu na ma³ych ekranach */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        background-color: #d8c8a7; /* T³o nawigacji mobilnej */
+        text-align: center;
+    }
+
+    .nav-item {
+        padding: 12px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .nav-link {
+        font-size: 1rem; /* Mniejsza czcionka */
+    }
+}
+
+/* 1. Smartfony (ekrany do 576px) */
+@media (max-width: 576px) {
+    .navbar {
+        font-size: 0.9rem; /* Mniejsze czcionki */
+        padding: 10px; /* Mniejszy padding */
+    }
+
+    .nav-item {
+        padding: 10px; /* Mniejsze odstêpy */
+    }
+
+    .page-title {
+        font-size: 2rem; /* Zmniejszony rozmiar tytu³u */
+    }
+}
+
+/* 2. Tablety (ekrany do 992px) */
+@media (max-width: 992px) {
+    .nav-scrollable {
+        height: auto; /* Pozwala na dynamiczne dopasowanie */
+    }
+
+    .list-group {
+        padding: 10px; /* Mniejszy padding */
+    }
+}
+
+/* 3. Laptopy i du¿e ekrany (ekrany do 1200px) */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 90%; /* Ograniczenie szerokoœci */
+    }
+
+    .book-title {
+        font-size: 1.8rem; /* Lekko zmniejszony tytu³ ksi¹¿ki */
+    }
+}
+
+/* 4. Bardzo du¿e ekrany (ponad 1200px) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 75%; /* Niech kontener nie bêdzie za szeroki */
+    }
+}
+
+
+/* Ogólny wygl¹d strony */
+.page-title {
+    color: #6f4f28; /* Kolor br¹zowy z menu */
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.page-description {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* Tytu³y sekcji */
+.section-title {
+    font-size: 1.8rem;
+    color: #6f4f28; /* Kolor br¹zowy */
+    margin-bottom: 15px;
+}
+
+/* Wygl¹d listy funkcji */
+.list-group {
+    background-color: #f5f5f5; /* Jasnoszare t³o dla listy */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item {
+    padding: 20px;
+    background-color: #fff; /* Bia³e t³o dla ka¿dego elementu */
+    border: 1px solid #ddd; /* Lekka ramka */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .list-group-item:hover {
+        background-color: #eaeaea; /* Jaœniejsze t³o przy najechaniu */
+        transform: translateX(5px); /* Lekkie przesuniêcie */
+    }
+
+/* Dodatkowe style dla wezwañ do dzia³ania */
+.call-to-action {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #6f4f28;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.explore-description {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* Ogólny wygl¹d strony */
+.page-title {
+    color: #6f4f28; /* Kolor br¹zowy z menu */
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Artyku³ o ksi¹¿ce */
+.book-article {
+    background-color: #f5f5f5; /* Jasnoszare t³o */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.book-title {
+    font-size: 2rem;
+    color: #6f4f28; /* Kolor br¹zowy */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.book-author, .book-category {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.book-description {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Przyciski i wezwania do dzia³ania */
+.call-to-action {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #6f4f28;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* Ogólny wygl¹d strony kategorii */
+.page-title {
+    color: #6f4f28; /* Kolor br¹zowy z menu */
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Sekcja wyboru kategorii */
+.category-selection {
+    background-color: #f5f5f5; /* Jasnoszare t³o */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+    .category-selection p {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+.category-button {
+    background-color: #6f4f28; /* Ciemny br¹zowy przycisk */
+    color: #fff; /* Bia³y tekst */
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .category-button:hover {
+        background-color: #8b5e3c; /* Jaœniejszy br¹zowy przycisk po najechaniu */
+        transform: translateY(-3px); /* Lekkie uniesienie przy najechaniu */
+    }
+
+/* Sekcja szczegó³ów kategorii */
+.category-details {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.book-description {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #555;
+    background-color: #f9f9f9;
+    padding: 8px;
+    border-radius: 5px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+.back-button {
+    background-color: #d8c8a7; /* Jasny br¹zowy */
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+    .back-button:hover {
+        background-color: #a68c62; /* Ciemniejszy br¹zowy */
+    }
+
+.category-title {
+    color: #6f4f28; /* Kolor br¹zowy */
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.book-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.book-item {
+    font-size: 1.2rem;
+    color: #333;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+    .book-item:hover {
+        background-color: #eaeaea; /* Jaœniejsze t³o po najechaniu */
+    }
+
+/* Styl dla strony dodawania ksi¹¿ki */
+.page-title {
+    color: #6f4f28; /* Kolor br¹zowy z menu */
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* Ogólny styl formularza */
+form {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Styl dla ka¿dego elementu formularza */
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        font-size: 1.1rem;
+        color: #6f4f28;
+        font-weight: bold;
+    }
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 5px;
+    transition: border-color 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #6f4f28; /* Kolor ramki na focus */
+    }
+
+/* Styl przycisku */
+button.btn {
+    background-color: #6f4f28;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    button.btn:hover {
+        background-color: #8b5e3c; /* Jaœniejszy br¹zowy przy najechaniu */
+    }
+
+/* Styl komunikatów o sukcesie i b³êdzie */
+.text-success {
+    color: #28a745; /* Zielony dla sukcesu */
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.text-danger {
+    color: #dc3545; /* Czerwony dla b³êdu */
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+/* Stylowanie dla wiadomoœci walidacji */
+.validation-message {
+    font-size: 0.9rem;
+    color: #dc3545; /* Czerwony dla b³êdów */
+    margin-top: 5px;
+}
+
+/*---------------------------------------assistant------------------------*/
+
+/* Style dla tytu³u strony */
+.page-title {
+    color: #6f4f28; /* Br¹zowy kolor */
+    font-size: 2.5rem; /* Du¿y nag³ówek */
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+/* Styl dla formularza */
+.form-control {
+    border-radius: 15px; /* Zaokr¹glone rogi */
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #dcdcdc;
+    background-color: #f5f5f5; /* Jasnoszare t³o */
+}
+
+.form-label {
+    color: #6f4f28;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Przycisk */
+.btn-main {
+    background-color: #6f4f28; /* Ciemny br¹zowy kolor */
+    color: white; /* Bia³y tekst */
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem; /* Rozmiar czcionki */
+    cursor: pointer;
+    border-radius: 8px; /* Zaokr¹glone rogi */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Animacje */
+}
+
+    .btn-main:hover {
+        background-color: #8b5e3c; /* Jaœniejszy br¹zowy przycisk po najechaniu */
+        transform: translateY(-3px); /* Lekkie uniesienie przy najechaniu */
+    }
+
+
+/* Styl dla karty ksi¹¿ki */
+.custom-card {
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Bia³e t³o */
+}
+
+.card-title {
+    font-size: 1.8rem;
+    color: #6f4f28;
+}
+
+.card-subtitle {
+    color: #9e7a56; /* Jaœniejszy br¹z dla autora */
+    font-size: 1.2rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #333333;
+}
+
+.badge.bg-category {
+    background-color: #9e7a56; /* Br¹zowa kategoria */
+    color: white;
+    padding: 8px;
+    font-size: 1rem;
+}
+
+/* Styl dla alertu */
+.alert-info {
+    background-color: #e0e7ff; /* Jasny b³êkit, subtelny, ale wyraŸnie widoczny */
+    color: #333; /* Ciemny tekst, by by³ dobrze widoczny */
+    border-color: #c0c7ff; /* Jaœniejszy b³êkitny obramowanie */
+    font-size: 1.1rem;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+}

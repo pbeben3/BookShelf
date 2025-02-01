@@ -1,0 +1,89 @@
+﻿@using BookShelf.Models
+@using BookShelf.Services
+@inject BookShelfService BookService
+@rendermode InteractiveServer
+@page "/addbook"
+
+<h1 class="text-center page-title">Add a New Book</h1>
+
+<EditForm Model="newBook" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <InputText id="title" @bind-Value="newBook.Title" class="form-control" />
+        <ValidationMessage For="@(() => newBook.Title)" />
+    </div>
+
+    <div class="form-group">
+        <label for="author">Author:</label>
+        <InputText id="author" @bind-Value="newBook.Author" class="form-control" />
+        <ValidationMessage For="@(() => newBook.Author)" />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <InputTextArea id="description" @bind-Value="newBook.Description" class="form-control" />
+        <ValidationMessage For="@(() => newBook.Description)" />
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <InputSelect id="category" @bind-Value="newBook.CategoryId" class="form-control">
+            <option value="">-- Select a Category --</option>
+            @foreach (var category in Enum.GetValues(typeof(BookCategory)).Cast<BookCategory>())
+            {
+                <option value="@(Convert.ToInt32(category))">@category</option>
+            }
+        </InputSelect>
+
+        <ValidationMessage For="@(() => newBook.CategoryId)" />
+    </div>
+
+    <button type="submit" class="category-button">Add Book</button>
+</EditForm>
+
+@if (isSuccess)
+{
+    <p class="text-success">Book added successfully!</p>
+}
+@if (isError)
+{
+    <p class="text-danger">An error occurred. Please try again.</p>
+}
+
+@code {
+    private Book newBook = new Book();
+    private bool isSuccess = false;
+    private bool isError = false;
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            var category = await BookService.GetCategoryByIdAsync(newBook.CategoryId);
+            if (category != null)
+            {
+                newBook.Category = category;
+                await BookService.AddBookAsync(newBook);
+                isSuccess = true;
+                isError = false;
+                ResetForm();
+            }
+            else
+            {
+                throw new Exception("Invalid category selected.");
+            }
+        }
+        catch
+        {
+            isSuccess = false;
+            isError = true;
+        }
+    }
+
+    private void ResetForm()
+    {
+        newBook = new Book();
+    }
+}

@@ -1,0 +1,111 @@
+﻿@page "/assistant"
+@rendermode InteractiveServer
+
+@using GroqApiLibrary;
+@using System.Text.Json;
+@using System.Text.Json.Nodes;
+
+<PageTitle>Book Assistant</PageTitle>
+
+<h3 class="text-center page-title">Book Assistant</h3>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="mb-3">
+                <label for="userPrompt" class="form-label">Enter your book query:</label>
+                <input type="text" id="userPrompt" class="form-control" @bind="userPrompt" placeholder="Suggest me a book about..." />
+            </div>
+            <button class="btn-main w-100" @onclick="ChatCompletion">Find Book</button>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+            @if (recommendedBook != null)
+            {
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">@recommendedBook.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@recommendedBook.Author</h6>
+                        <p class="card-text">@recommendedBook.Description</p>
+                        <span class="badge bg-category">@recommendedBook.Category</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p class="alert alert-info text-center">Waiting for response...</p>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private string userPrompt = "Tell me about what you want from a book";
+    private BookRecommendation? recommendedBook;
+
+    private static string apiKey = "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";
+    private GroqApiClient groqApi = new GroqApiClient(apiKey);
+
+    private async Task ChatCompletion()
+    {
+        if (string.IsNullOrWhiteSpace(userPrompt))
+        {
+            recommendedBook = null;
+            return;
+        }
+
+        var request = new JsonObject
+            {
+                ["model"] = "mixtral-8x7b-32768",
+                ["messages"] = new JsonArray
+            {
+                new JsonObject
+                {
+                    ["role"] = "system",
+                    ["content"] = "You are an assistant that helps users find books. Respond only with book recommendations. Format the response in JSON:\n" +
+                                    "{\n" +
+                                    "  \"Title\": \"Book title\",\n" +
+                                    "  \"Author\": \"Author name\",\n" +
+                                    "  \"Description\": \"A detailed summary of the book, including its main themes, plot, and what makes it unique. The description should be at least 100 words long.\",\n" +
+                                    "  \"Category\": \"Book category\"\n" +
+                                    "}"
+                },
+                new JsonObject
+                {
+                    ["role"] = "user",
+                    ["content"] = userPrompt
+                }
+            }
+            };
+
+        try
+        {
+            var result = await groqApi.CreateChatCompletionAsync(request);
+            var jsonResponse = result?["choices"]?[0]?["message"]?["content"]?.ToString();
+
+            if (!string.IsNullOrEmpty(jsonResponse))
+            {
+                recommendedBook = JsonSerializer.Deserialize<BookRecommendation>(jsonResponse);
+            }
+            else
+            {
+                recommendedBook = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            recommendedBook = null;
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    private class BookRecommendation
+    {
+        public string Title { get; set; } = "Unknown Title";
+        public string Author { get; set; } = "Unknown Author";
+        public string Description { get; set; } = "No description available.";
+        public string Category { get; set; } = "Uncategorized";
+    }
+}
