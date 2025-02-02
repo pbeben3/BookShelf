@@ -506,3 +506,12 @@ button.btn {
     text-align: center;
     border-radius: 8px;
 }
+
+.to-read-container {
+    width: 300px;
+    height: 200px;
+    border: 2px dashed #aaa;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
